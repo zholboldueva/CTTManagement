@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+  xmlns:zcp="http://www.sigmadesigns.com/z-wave_cert_portal/xml-schemata" 
+  attributeFormDefault="unqualified" 
+  elementFormDefault="qualified" 
+  targetNamespace="http://www.sigmadesigns.com/z-wave_cert_portal/xml-schemata">
+
+<!--  
+  <xsd:import 
+    namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+-->
+  
+  <xsd:annotation>
+    <xsd:documentation xml:lang="en">
+     Z-Wave certification form descriptor schema.
+     Version 1
+    </xsd:documentation>
+  </xsd:annotation>
+  
+  <xsd:element name="CertForm" type="zcp:certForm">
+    <!-- Section names must be unique -->
+    <xsd:unique name="formSectionUnique">
+      <xsd:selector xpath="zcp:formSection" />
+      <xsd:field xpath="@name" />
+    </xsd:unique>
+    <!-- Section ids must be unique -->
+    <xsd:unique name="formSectionIdUnique">
+      <xsd:selector xpath="zcp:formSection" />
+      <xsd:field xpath="zcp:sectionId" />
+    </xsd:unique>
+    <!-- All item ids must be unique -->
+    <xsd:unique name="itemIdUnique">
+      <xsd:selector xpath=".//zcp:formItem" />
+      <xsd:field xpath="zcp:itemId" />
+    </xsd:unique>
+    <!-- All combo input item ids must be unique -->
+    <xsd:unique name="comboItemIdUnique">
+      <xsd:selector xpath=".//zcp:comboInputItem" />
+      <xsd:field xpath="zcp:itemId" />
+    </xsd:unique>
+  </xsd:element>
+    
+  <xsd:complexType name="certForm">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="formDescription" type="xsd:string" />
+      <xsd:element minOccurs="0" name="formChangeLog" type="xsd:string" />
+      <xsd:element maxOccurs="unbounded" name="formSection" type="zcp:formSection" />
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" />
+    <xsd:attribute default="5" name="prefixId" type="xsd:string" />
+    <xsd:attribute default="ZC10" name="prefixNumber" type="xsd:string" />
+    <xsd:attribute name="version" type="xsd:unsignedInt" />
+  </xsd:complexType>
+  
+  <xsd:complexType name="formSection">
+    <xsd:sequence>
+      <xsd:element name="sectionId" type="xsd:string" />
+      <xsd:element minOccurs="0" name="sectionDescription" type="xsd:string" />
+      <xsd:element maxOccurs="unbounded" name="formItem" type="zcp:formItem" />
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" />
+    <xsd:attribute name="prefix" type="xsd:string" />
+    <xsd:attribute default="true" name="hasStatusColumn" type="xsd:boolean" />
+    <xsd:attribute default="true" name="hasCertColumn" type="xsd:boolean" />
+    <xsd:attribute default="false" name="hasRoleColumn" type="xsd:boolean" />
+    <xsd:attribute default="false" name="hidden" type="xsd:boolean" />
+  </xsd:complexType>
+
+  <xsd:complexType name="formItem">
+    <xsd:sequence>
+      <xsd:element name="itemId" type="xsd:string" />
+      <xsd:element minOccurs="0" name="itemHeader" type="xsd:string" />
+      <xsd:element minOccurs="0" name="itemTitle" type="xsd:string" />
+      <xsd:element minOccurs="0" name="itemDescription" type="xsd:string" />
+      <xsd:element minOccurs="0" name="itemNote" type="xsd:string" />
+      <xsd:element minOccurs="0" name="itemWikiLink" type="xsd:string" />
+      <xsd:element minOccurs="0" name="itemStatus" type="zcp:itemStatusEnum" />
+      <xsd:element minOccurs="0" name="tagName" type="xsd:string" />
+      <xsd:element minOccurs="0" name="tagValue" type="xsd:string" />
+      <xsd:element minOccurs="0" name="zatsKey" type="xsd:string" />
+      <xsd:element minOccurs="0" name="zatsValue" type="xsd:string" />
+      <xsd:element minOccurs="0" name="formInput" type="zcp:formInput" />
+      <xsd:element minOccurs="0" name="zatsTests" type="zcp:zatsTests" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="itemRelation" type="zcp:itemRelation" />
+      <xsd:element minOccurs="0" name="childItems" type="zcp:childItems" />
+    </xsd:sequence>
+    <xsd:attribute default="false" name="hidden" type="xsd:boolean" />
+    <xsd:attribute default="single" name="cardinality" type="zcp:formItemCardinality" />
+  </xsd:complexType>
+  
+  <xsd:complexType name="formInput">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="inputRole" type="zcp:inputTypeSelect" />
+      <xsd:element minOccurs="0" name="inputSelect" type="zcp:inputTypeSelect" />
+      <xsd:element minOccurs="0" name="inputCustom" type="zcp:inputTypeCustom" />
+      <xsd:element minOccurs="0" name="inputSelfCert" type="zcp:inputTypeTest" />
+      <xsd:element minOccurs="0" name="inputVerification" type="zcp:inputTypeTest" />
+      <xsd:element minOccurs="0" name="inputAdhoc" type="zcp:inputTypeTest" />
+      <xsd:element minOccurs="0" name="inputCombo" type="zcp:inputTypeCombo" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+    <xsd:complexType name="zatsTests">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="zatsTest" type="zcp:zatsTest" />
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="itemRelation">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="toItemId" type="zcp:toItemIdType" />
+    </xsd:sequence>
+    <xsd:attribute name="type" type="zcp:relationType" />
+  </xsd:complexType>
+
+  <xsd:complexType name="childItems">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="formItem" type="zcp:formItem" />
+    </xsd:sequence>
+    <xsd:attribute default="subgroup" name="type" type="zcp:formItemType" />
+  </xsd:complexType>
+  
+  <xsd:complexType name="inputTypeSelect">
+    <xsd:attribute fixed="select" name="type" />
+  </xsd:complexType>
+  
+  <xsd:complexType name="inputTypeCustom">
+    <xsd:attribute default="text" name="type" type="zcp:formInputTypeCustomEnum"/>
+    <xsd:attribute name="label" type="xsd:string"/>
+    <xsd:attribute name="options" type="xsd:string"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="inputTypeTest">
+    <xsd:attribute default="select" name="type" type="zcp:formInputTypeTestEnum"/>
+    <xsd:attribute name="value" type="xsd:string"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="inputTypeCombo">
+    <xsd:sequence>
+      <xsd:element minOccurs="1" maxOccurs="unbounded" name="comboInputItem" type="zcp:comboInputItem" />
+    </xsd:sequence>
+    <xsd:attribute default="single" name="type" type="zcp:formInputTypeComboEnum"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="zatsTest">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute default="select" name="triggeredBy" type="zcp:relationType" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="toItemIdType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute default="select" name="triggeredBy" type="zcp:relationType" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <xsd:simpleType name="relationType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="select" />
+      <!-- select the toItem and check support (for command class items) -->
+      <xsd:enumeration value="support" />
+      <!-- select the toItem and check control (for command class items) -->
+      <xsd:enumeration value="control" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="formItemCardinality">
+    <xsd:restriction base="xsd:string">
+      <!-- item occures only once -->
+      <xsd:enumeration value="single" />
+      <!-- item occures zero to n times -->
+      <xsd:enumeration value="zero_or_more" />
+      <!-- item occures 1 to n times -->
+      <xsd:enumeration value="one_or_more" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="formItemType">
+    <xsd:restriction base="xsd:string">
+      <!-- item child group where multiple selections are allowed (check boxes) -->
+      <xsd:enumeration value="subgroup" />
+      <!-- item child group where multiple selections are allowed (check boxes) -->
+      <xsd:enumeration value="one_or_more" />
+      <!-- item child group where only one item can be selected (radio buttons) -->
+      <xsd:enumeration value="choice" />
+      <!-- has multiple child items with ComboBox inputs. each ComboBox value can only be chosen once -->
+      <xsd:enumeration value="choice_unique" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="formInputTypeCustomEnum">
+    <xsd:restriction base="xsd:string">
+      <!-- Display text input field (for short strings) -->
+      <xsd:enumeration value="text" />
+      <!-- Display text area field (for longer description fields) -->
+      <xsd:enumeration value="text_area" />
+      <!-- Display text field for a even length hexidecimal value in the format 0x... -->
+      <xsd:enumeration value="hex" />
+      <!-- Display text field for hexidecimal value in the format 0x00 -->
+      <xsd:enumeration value="hex8" />
+      <!-- Display text field for hexidecimal value in the format 0x0000 -->
+      <xsd:enumeration value="hex16" />
+      <!-- Display text field for hexidecimal value in the format 0x000000 -->
+      <xsd:enumeration value="hex24" />
+      <!-- Display text field for hexidecimal value in the format 0x00000000 -->
+      <xsd:enumeration value="hex32" />
+      <!-- Display text field for hexidecimal value in the format 0x00000000000000000000000000000000 -->
+      <xsd:enumeration value="hex128" />
+      <!-- Display text field for integer values in decimal format 123456789 (any length) -->
+      <xsd:enumeration value="integer" />
+      <!-- Display text field for integer values in decimal format (allowed value 0-255) -->
+      <xsd:enumeration value="int_0-255" />
+      <!-- Display text field for integer values in decimal format (allowed value 1-255) -->
+      <xsd:enumeration value="int_1-255" />
+      <!-- Display text field for integer values in decimal format (allowed value 2-255) -->
+      <xsd:enumeration value="int_2-255" />
+      <!-- Display text field for integer values in decimal format (allowed value 1-127) -->
+      <xsd:enumeration value="int_1-127" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="formInputTypeComboEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="single" />
+      <xsd:enumeration value="multiple" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="formInputTypeTestEnum">
+    <xsd:restriction base="xsd:string">
+	  <!-- Display default combo box for value selection -->
+      <xsd:enumeration value="select" />
+      <!-- Display text input field (for short strings) -->
+      <xsd:enumeration value="text" />
+	  <!-- Display static text given in value attribute -->
+      <xsd:enumeration value="static" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="comboInputItem">
+    <xsd:sequence>
+      <xsd:element name="itemId" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="comboItemRelation" type="zcp:itemRelation" />
+    </xsd:sequence>
+    <xsd:attribute name="value" type="xsd:string" />
+    <xsd:attribute name="zatsValue" type="xsd:string" />
+  </xsd:complexType>
+  
+  <xsd:simpleType name="itemStatusEnum">
+    <xsd:restriction base="xsd:string">
+      <!-- Mandatory -->
+      <xsd:enumeration value="M" />
+      <!-- Optional -->
+      <xsd:enumeration value="O" />
+      <!-- Recommended -->
+      <xsd:enumeration value="R" />
+      <!-- Optional or Mandatory - depends on condition in item description -->
+      <xsd:enumeration value="O/M" />
+      <!-- Mandatory or Recommended - depends on condition in item description -->
+      <xsd:enumeration value="M/R" />
+      <!-- Mandatory single selection: one out of n items must be selected -->
+      <xsd:enumeration value="MS" />
+      <!-- Mandatory multiple selection: at least one out of n items must be selected -->
+      <xsd:enumeration value="MM" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>

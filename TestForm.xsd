@@ -1,0 +1,506 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.sigmadesigns.com/z-wave_cert_portal/xml-schemata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="CertForm">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="formDescription" type="xs:string" />
+				<xs:element name="formChangeLog" type="xs:string" />
+				<xs:element maxOccurs="unbounded" name="formSection">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="sectionId" type="xs:string" />
+							<xs:element minOccurs="0" name="sectionDescription" type="xs:string" />
+							<xs:element maxOccurs="unbounded" name="formItem">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:choice maxOccurs="unbounded">
+											<xs:element name="itemId" type="xs:string" />
+											<xs:element name="itemHeader" type="xs:string" />
+											<xs:element name="itemTitle" type="xs:string" />
+											<xs:element name="itemNote" type="xs:string" />
+											<xs:element name="itemDescription" type="xs:string" />
+											<xs:element name="itemWikiLink" type="xs:string" />
+											<xs:element name="itemStatus" type="xs:string" />
+											<xs:element name="formInput">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="inputSelect" />
+														<xs:element minOccurs="0" name="inputCustom" />
+														<xs:element minOccurs="0" name="inputSelfCert" />
+														<xs:element minOccurs="0" name="inputVerification">
+															<xs:complexType>
+																<xs:attribute name="type" type="xs:string" use="optional" />
+																<xs:attribute name="value" type="xs:string" use="optional" />
+															</xs:complexType>
+														</xs:element>
+														<xs:element minOccurs="0" name="inputAdhoc">
+															<xs:complexType>
+																<xs:attribute name="type" type="xs:string" use="optional" />
+																<xs:attribute name="value" type="xs:string" use="optional" />
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="zatsTests">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element maxOccurs="unbounded" name="zatsTest" type="xs:string" />
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="childItems">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element maxOccurs="unbounded" name="formItem">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:choice maxOccurs="unbounded">
+																		<xs:element name="itemId" type="xs:string" />
+																		<xs:element name="itemHeader" type="xs:string" />
+																		<xs:element name="itemTitle" type="xs:string" />
+																		<xs:element name="itemDescription" type="xs:string" />
+																		<xs:element name="itemNote" type="xs:string" />
+																		<xs:element name="itemWikiLink" type="xs:string" />
+																		<xs:element name="itemStatus" type="xs:string" />
+																		<xs:element name="zatsKey" type="xs:string" />
+																		<xs:element name="zatsValue" type="xs:string" />
+																		<xs:element name="tagName" type="xs:string" />
+																		<xs:element name="tagValue" type="xs:string" />
+																		<xs:element name="formInput">
+																			<xs:complexType>
+																				<xs:sequence minOccurs="0">
+																					<xs:element minOccurs="0" name="inputRole" />
+																					<xs:element name="inputSelect" />
+																					<xs:element minOccurs="0" name="inputCustom">
+																						<xs:complexType>
+																							<xs:attribute name="type" type="xs:string" use="optional" />
+																						</xs:complexType>
+																					</xs:element>
+																					<xs:element minOccurs="0" name="inputSelfCert" />
+																					<xs:element minOccurs="0" name="inputVerification">
+																						<xs:complexType>
+																							<xs:attribute name="type" type="xs:string" use="optional" />
+																							<xs:attribute name="value" type="xs:string" use="optional" />
+																						</xs:complexType>
+																					</xs:element>
+																					<xs:element minOccurs="0" name="inputAdhoc">
+																						<xs:complexType>
+																							<xs:attribute name="type" type="xs:string" use="optional" />
+																							<xs:attribute name="value" type="xs:string" use="optional" />
+																						</xs:complexType>
+																					</xs:element>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="itemRelation">
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element maxOccurs="unbounded" name="toItemId">
+																						<xs:complexType>
+																							<xs:simpleContent>
+																								<xs:extension base="xs:string">
+																									<xs:attribute name="triggeredBy" type="xs:string" use="optional" />
+																								</xs:extension>
+																							</xs:simpleContent>
+																						</xs:complexType>
+																					</xs:element>
+																				</xs:sequence>
+																				<xs:attribute name="type" type="xs:string" use="required" />
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="childItems">
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element maxOccurs="unbounded" name="formItem">
+																						<xs:complexType>
+																							<xs:sequence>
+																								<xs:choice maxOccurs="unbounded">
+																									<xs:element name="itemId" type="xs:string" />
+																									<xs:element name="itemHeader" type="xs:string" />
+																									<xs:element name="itemTitle" type="xs:string" />
+																									<xs:element name="itemDescription" type="xs:string" />
+																									<xs:element name="itemNote" type="xs:string" />
+																									<xs:element name="itemStatus" type="xs:string" />
+																									<xs:element name="zatsKey" type="xs:string" />
+																									<xs:element name="zatsValue" type="xs:string" />
+																									<xs:element name="tagName" type="xs:string" />
+																									<xs:element name="tagValue" type="xs:string" />
+																									<xs:element name="formInput">
+																										<xs:complexType>
+																											<xs:sequence>
+																												<xs:choice maxOccurs="unbounded">
+																													<xs:element name="inputSelect" />
+																													<xs:element name="inputCombo">
+																														<xs:complexType>
+																															<xs:sequence>
+																																<xs:element maxOccurs="unbounded" name="comboInputItem">
+																																	<xs:complexType>
+																																		<xs:sequence>
+																																			<xs:element name="itemId" type="xs:string" />
+																																			<xs:element minOccurs="0" name="comboItemRelation">
+																																				<xs:complexType>
+																																					<xs:sequence>
+																																						<xs:element maxOccurs="unbounded" name="toItemId" type="xs:string" />
+																																					</xs:sequence>
+																																					<xs:attribute name="type" type="xs:string" use="required" />
+																																				</xs:complexType>
+																																			</xs:element>
+																																		</xs:sequence>
+																																		<xs:attribute name="value" type="xs:string" use="required" />
+																																		<xs:attribute name="zatsValue" type="xs:string" use="optional" />
+																																	</xs:complexType>
+																																</xs:element>
+																															</xs:sequence>
+																															<xs:attribute name="type" type="xs:string" use="optional" />
+																														</xs:complexType>
+																													</xs:element>
+																													<xs:element name="inputSelfCert" />
+																													<xs:element name="inputVerification">
+																														<xs:complexType>
+																															<xs:attribute name="type" type="xs:string" use="optional" />
+																															<xs:attribute name="value" type="xs:string" use="optional" />
+																														</xs:complexType>
+																													</xs:element>
+																													<xs:element name="inputAdhoc">
+																														<xs:complexType>
+																															<xs:attribute name="type" type="xs:string" use="optional" />
+																															<xs:attribute name="value" type="xs:string" use="optional" />
+																														</xs:complexType>
+																													</xs:element>
+																													<xs:element name="inputCustom">
+																														<xs:complexType>
+																															<xs:attribute name="type" type="xs:string" use="optional" />
+																														</xs:complexType>
+																													</xs:element>
+																												</xs:choice>
+																											</xs:sequence>
+																										</xs:complexType>
+																									</xs:element>
+																									<xs:element name="itemRelation">
+																										<xs:complexType>
+																											<xs:sequence>
+																												<xs:element maxOccurs="unbounded" name="toItemId" type="xs:string" />
+																											</xs:sequence>
+																											<xs:attribute name="type" type="xs:string" use="required" />
+																										</xs:complexType>
+																									</xs:element>
+																									<xs:element name="childItems">
+																										<xs:complexType>
+																											<xs:sequence>
+																												<xs:element maxOccurs="unbounded" name="formItem">
+																													<xs:complexType>
+																														<xs:sequence>
+																															<xs:choice maxOccurs="unbounded">
+																																<xs:element name="itemId" type="xs:string" />
+																																<xs:element name="itemDescription" type="xs:string" />
+																																<xs:element name="itemNote" type="xs:string" />
+																																<xs:element name="itemStatus" type="xs:string" />
+																																<xs:element name="zatsKey" type="xs:string" />
+																																<xs:element name="zatsValue" type="xs:string" />
+																																<xs:element name="tagName" type="xs:string" />
+																																<xs:element name="tagValue" type="xs:string" />
+																																<xs:element name="formInput">
+																																	<xs:complexType>
+																																		<xs:sequence>
+																																			<xs:choice maxOccurs="unbounded">
+																																				<xs:element name="inputSelect" />
+																																				<xs:element name="inputSelfCert" />
+																																				<xs:element name="inputVerification">
+																																					<xs:complexType>
+																																						<xs:attribute name="type" type="xs:string" use="optional" />
+																																						<xs:attribute name="value" type="xs:string" use="optional" />
+																																					</xs:complexType>
+																																				</xs:element>
+																																				<xs:element name="inputAdhoc">
+																																					<xs:complexType>
+																																						<xs:attribute name="type" type="xs:string" use="optional" />
+																																						<xs:attribute name="value" type="xs:string" use="optional" />
+																																					</xs:complexType>
+																																				</xs:element>
+																																				<xs:element name="inputCustom">
+																																					<xs:complexType>
+																																						<xs:attribute name="type" type="xs:string" use="optional" />
+																																					</xs:complexType>
+																																				</xs:element>
+																																				<xs:element name="inputCombo">
+																																					<xs:complexType>
+																																						<xs:sequence>
+																																							<xs:element maxOccurs="unbounded" name="comboInputItem">
+																																								<xs:complexType>
+																																									<xs:sequence>
+																																										<xs:element name="itemId" type="xs:string" />
+																																										<xs:element maxOccurs="unbounded" name="comboItemRelation">
+																																											<xs:complexType>
+																																												<xs:sequence>
+																																													<xs:element name="toItemId" type="xs:string" />
+																																												</xs:sequence>
+																																												<xs:attribute name="type" type="xs:string" use="required" />
+																																											</xs:complexType>
+																																										</xs:element>
+																																									</xs:sequence>
+																																									<xs:attribute name="value" type="xs:string" use="required" />
+																																									<xs:attribute name="zatsValue" type="xs:string" use="required" />
+																																								</xs:complexType>
+																																							</xs:element>
+																																						</xs:sequence>
+																																						<xs:attribute name="type" type="xs:string" use="required" />
+																																					</xs:complexType>
+																																				</xs:element>
+																																			</xs:choice>
+																																		</xs:sequence>
+																																	</xs:complexType>
+																																</xs:element>
+																																<xs:element name="itemRelation">
+																																	<xs:complexType>
+																																		<xs:sequence>
+																																			<xs:element maxOccurs="unbounded" name="toItemId" type="xs:string" />
+																																		</xs:sequence>
+																																		<xs:attribute name="type" type="xs:string" use="required" />
+																																	</xs:complexType>
+																																</xs:element>
+																																<xs:element name="childItems">
+																																	<xs:complexType>
+																																		<xs:sequence>
+																																			<xs:element maxOccurs="unbounded" name="formItem">
+																																				<xs:complexType>
+																																					<xs:sequence>
+																																						<xs:element name="itemId" type="xs:string" />
+																																						<xs:element name="itemDescription" type="xs:string" />
+																																						<xs:element minOccurs="0" name="itemNote" type="xs:string" />
+																																						<xs:element minOccurs="0" name="itemWikiLink" type="xs:string" />
+																																						<xs:element name="itemStatus" type="xs:string" />
+																																						<xs:element minOccurs="0" name="tagName" type="xs:string" />
+																																						<xs:element minOccurs="0" name="tagValue" type="xs:string" />
+																																						<xs:element minOccurs="0" name="zatsKey" type="xs:string" />
+																																						<xs:element minOccurs="0" name="zatsValue" type="xs:string" />
+																																						<xs:element name="formInput">
+																																							<xs:complexType>
+																																								<xs:sequence>
+																																									<xs:element name="inputSelect" />
+																																									<xs:element minOccurs="0" name="inputCustom">
+																																										<xs:complexType>
+																																											<xs:attribute name="type" type="xs:string" use="optional" />
+																																										</xs:complexType>
+																																									</xs:element>
+																																									<xs:element minOccurs="0" name="inputSelfCert" />
+																																									<xs:element minOccurs="0" name="inputVerification">
+																																										<xs:complexType>
+																																											<xs:attribute name="type" type="xs:string" use="optional" />
+																																											<xs:attribute name="value" type="xs:string" use="optional" />
+																																										</xs:complexType>
+																																									</xs:element>
+																																									<xs:element minOccurs="0" name="inputAdhoc">
+																																										<xs:complexType>
+																																											<xs:attribute name="type" type="xs:string" use="optional" />
+																																											<xs:attribute name="value" type="xs:string" use="optional" />
+																																										</xs:complexType>
+																																									</xs:element>
+																																									<xs:element minOccurs="0" name="inputCombo">
+																																										<xs:complexType>
+																																											<xs:sequence>
+																																												<xs:element maxOccurs="unbounded" name="comboInputItem">
+																																													<xs:complexType>
+																																														<xs:sequence>
+																																															<xs:element name="itemId" type="xs:string" />
+																																														</xs:sequence>
+																																														<xs:attribute name="value" type="xs:unsignedByte" use="required" />
+																																													</xs:complexType>
+																																												</xs:element>
+																																											</xs:sequence>
+																																										</xs:complexType>
+																																									</xs:element>
+																																								</xs:sequence>
+																																							</xs:complexType>
+																																						</xs:element>
+																																						<xs:element minOccurs="0" name="zatsTests">
+																																							<xs:complexType>
+																																								<xs:sequence>
+																																									<xs:element name="zatsTest" type="xs:string" />
+																																								</xs:sequence>
+																																							</xs:complexType>
+																																						</xs:element>
+																																						<xs:element minOccurs="0" name="childItems">
+																																							<xs:complexType>
+																																								<xs:sequence>
+																																									<xs:element maxOccurs="unbounded" name="formItem">
+																																										<xs:complexType>
+																																											<xs:sequence>
+																																												<xs:element name="itemId" type="xs:string" />
+																																												<xs:element minOccurs="0" name="itemHeader" type="xs:string" />
+																																												<xs:element name="itemDescription" type="xs:string" />
+																																												<xs:element minOccurs="0" name="itemNote" type="xs:string" />
+																																												<xs:element name="itemStatus" type="xs:string" />
+																																												<xs:element minOccurs="0" name="tagName" type="xs:string" />
+																																												<xs:element minOccurs="0" name="tagValue" type="xs:string" />
+																																												<xs:element minOccurs="0" name="zatsKey" type="xs:string" />
+																																												<xs:element minOccurs="0" name="zatsValue" type="xs:string" />
+																																												<xs:element name="formInput">
+																																													<xs:complexType>
+																																														<xs:sequence>
+																																															<xs:element name="inputSelect" />
+																																															<xs:element minOccurs="0" name="inputSelfCert" />
+																																															<xs:element minOccurs="0" name="inputVerification">
+																																																<xs:complexType>
+																																																	<xs:attribute name="type" type="xs:string" use="optional" />
+																																																	<xs:attribute name="value" type="xs:string" use="optional" />
+																																																</xs:complexType>
+																																															</xs:element>
+																																															<xs:element minOccurs="0" name="inputAdhoc">
+																																																<xs:complexType>
+																																																	<xs:attribute name="type" type="xs:string" use="optional" />
+																																																	<xs:attribute name="value" type="xs:string" use="optional" />
+																																																</xs:complexType>
+																																															</xs:element>
+																																															<xs:element minOccurs="0" name="inputCustom">
+																																																<xs:complexType>
+																																																	<xs:attribute name="type" type="xs:string" use="optional" />
+																																																</xs:complexType>
+																																															</xs:element>
+																																														</xs:sequence>
+																																													</xs:complexType>
+																																												</xs:element>
+																																												<xs:element minOccurs="0" name="childItems">
+																																													<xs:complexType>
+																																														<xs:sequence>
+																																															<xs:element name="formItem">
+																																																<xs:complexType>
+																																																	<xs:sequence>
+																																																		<xs:element name="itemId" type="xs:string" />
+																																																		<xs:element name="itemDescription" type="xs:string" />
+																																																		<xs:element name="itemStatus" type="xs:string" />
+																																																		<xs:element name="tagName" type="xs:string" />
+																																																		<xs:element name="tagValue" type="xs:string" />
+																																																		<xs:element name="formInput">
+																																																			<xs:complexType>
+																																																				<xs:sequence>
+																																																					<xs:element name="inputSelect" />
+																																																					<xs:element name="inputSelfCert" />
+																																																					<xs:element name="inputVerification">
+																																																						<xs:complexType>
+																																																							<xs:attribute name="type" type="xs:string" use="required" />
+																																																							<xs:attribute name="value" type="xs:string" use="required" />
+																																																						</xs:complexType>
+																																																					</xs:element>
+																																																					<xs:element name="inputAdhoc">
+																																																						<xs:complexType>
+																																																							<xs:attribute name="type" type="xs:string" use="required" />
+																																																							<xs:attribute name="value" type="xs:string" use="required" />
+																																																						</xs:complexType>
+																																																					</xs:element>
+																																																				</xs:sequence>
+																																																			</xs:complexType>
+																																																		</xs:element>
+																																																	</xs:sequence>
+																																																</xs:complexType>
+																																															</xs:element>
+																																														</xs:sequence>
+																																														<xs:attribute name="type" type="xs:string" use="required" />
+																																													</xs:complexType>
+																																												</xs:element>
+																																											</xs:sequence>
+																																										</xs:complexType>
+																																									</xs:element>
+																																								</xs:sequence>
+																																								<xs:attribute name="type" type="xs:string" use="required" />
+																																							</xs:complexType>
+																																						</xs:element>
+																																					</xs:sequence>
+																																				</xs:complexType>
+																																			</xs:element>
+																																		</xs:sequence>
+																																		<xs:attribute name="type" type="xs:string" use="required" />
+																																	</xs:complexType>
+																																</xs:element>
+																																<xs:element name="itemWikiLink" type="xs:string" />
+																																<xs:element name="zatsTests">
+																																	<xs:complexType>
+																																		<xs:sequence>
+																																			<xs:element name="zatsTest" type="xs:string" />
+																																		</xs:sequence>
+																																	</xs:complexType>
+																																</xs:element>
+																																<xs:element name="itemHeader" type="xs:string" />
+																															</xs:choice>
+																														</xs:sequence>
+																													</xs:complexType>
+																												</xs:element>
+																											</xs:sequence>
+																											<xs:attribute name="type" type="xs:string" use="required" />
+																										</xs:complexType>
+																									</xs:element>
+																									<xs:element name="itemWikiLink" type="xs:string" />
+																									<xs:element name="zatsTests">
+																										<xs:complexType>
+																											<xs:sequence>
+																												<xs:element maxOccurs="unbounded" name="zatsTest" type="xs:string" />
+																											</xs:sequence>
+																										</xs:complexType>
+																									</xs:element>
+																								</xs:choice>
+																							</xs:sequence>
+																							<xs:attribute name="hidden" type="xs:boolean" use="optional" />
+																						</xs:complexType>
+																					</xs:element>
+																				</xs:sequence>
+																				<xs:attribute name="type" type="xs:string" use="required" />
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="zatsTests">
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element maxOccurs="unbounded" name="zatsTest">
+																						<xs:complexType>
+																							<xs:simpleContent>
+																								<xs:extension base="xs:string">
+																									<xs:attribute name="triggeredBy" type="xs:string" use="optional" />
+																								</xs:extension>
+																							</xs:simpleContent>
+																						</xs:complexType>
+																					</xs:element>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:choice>
+																</xs:sequence>
+																<xs:attribute name="cardinality" type="xs:string" use="optional" />
+																<xs:attribute name="hidden" type="xs:boolean" use="optional" />
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+													<xs:attribute name="type" type="xs:string" use="required" />
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="itemRelation">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element maxOccurs="unbounded" name="toItemId" type="xs:string" />
+													</xs:sequence>
+													<xs:attribute name="type" type="xs:string" use="required" />
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="zatsKey" type="xs:string" />
+											<xs:element name="zatsValue" type="xs:string" />
+											<xs:element name="tagName" type="xs:string" />
+											<xs:element name="tagValue" type="xs:string" />
+										</xs:choice>
+									</xs:sequence>
+									<xs:attribute name="hidden" type="xs:boolean" use="optional" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="name" type="xs:string" use="required" />
+						<xs:attribute name="prefix" type="xs:string" use="required" />
+						<xs:attribute name="hasStatusColumn" type="xs:boolean" use="optional" />
+						<xs:attribute name="hidden" type="xs:boolean" use="optional" />
+						<xs:attribute name="hasRoleColumn" type="xs:boolean" use="optional" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:unsignedByte" use="required" />
+			<xs:attribute name="name" type="xs:string" use="required" />
+			<xs:attribute name="prefixId" type="xs:string" use="required" />
+			<xs:attribute name="prefixNumber" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

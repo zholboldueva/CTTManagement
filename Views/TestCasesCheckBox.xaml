@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="CTTManagement.Views.TestCasesCheckBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:CTTManagement.Views"
+             xmlns:viewmodel="clr-namespace:CTTManagement.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="150">
+
+    <!--<UserControl.Resources>
+        <local:ListConverter x:Key="ListConverter" />
+    </UserControl.Resources>-->
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ListBox x:Name="TestCasesCheckBox1"   Margin="10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox x:Name="chkitems" Content="{Binding Name}" IsChecked="{Binding IsChecked }" ></CheckBox>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </ScrollViewer>
+</UserControl>

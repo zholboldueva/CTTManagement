@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="CTTManagement.Views.TestCasesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CTTManagement.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DataGrid x:Name="ZatsGridXAML" ItemsSource = "{Binding Path = ZatsTestsModel}" AutoGenerateColumns="False"  
+              SelectionMode="Single">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Test Cases" Binding="{Binding TestCaseName}" Width="280" CanUserSort="False"/>
+                <DataGridTextColumn Header="TC Input Keys" Binding="{Binding TCInputKeys}" Width="200" CanUserSort="False" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="TC Result Keys" Binding="{Binding TCResultKeys}" Width="250" CanUserSort="False" Visibility="{Binding Path=IsChecked}"/>
+                <DataGridTextColumn Header="Write" Binding="{Binding Write}" Width="90" CanUserSort="False"/>
+                <DataGridTextColumn Header="Review" Binding="{Binding Review}" Width="90" CanUserSort="False"/>
+                <DataGridTextColumn Header="Z-Ware Date" Binding="{Binding ZWareDate}" Width="80" CanUserSort="False"/>
+                <DataGridTextColumn Header="Power Strip Date" Binding="{Binding PowerStripDate}" Width="100" CanUserSort="False"/>
+                <DataGridTextColumn Header="PIR Sensor Date" Binding="{Binding PIRSensorDate}"  Width="100" CanUserSort="False"/>
+                <DataGridTextColumn Header="Door Lock Date" Binding="{Binding DoorLockDate}"  Width="100" CanUserSort="False"/>
+                <DataGridTextColumn Header="diverse Type" Binding="{Binding DiverseType}"  Width="80" CanUserSort="False"/>
+                <DataGridTextColumn Header="diverse Date" Binding="{Binding DiverseDate}" Width="80" CanUserSort="False"/>
+                <DataGridTextColumn Header="DUT-based diverse Type" Binding="{Binding DUTBasedDiverseType}"  Width="140" CanUserSort="False"/>
+                <DataGridTextColumn Header="DUT-based diverse Date" Binding="{Binding DUTBasedDiverseDate}" Width="140" CanUserSort="False"/>
+                <DataGridTextColumn Header="ZCP-based diverse Type" Binding="{Binding ZCPBasedType}" Width="140" CanUserSort="False"/>
+                <DataGridTextColumn Header="ZCP-based diverse Date" Binding="{Binding ZCPBasedDate}" Width="140" CanUserSort="False"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="200" CanUserSort="False"/>
+                <DataGridTextColumn Header="Spec Revision" Binding="{Binding SpecRevision}" Width="100" CanUserSort="False"/>
+                <DataGridTextColumn Header="Test Case Group" Binding="{Binding TestCaseGroup}" Width="100" CanUserSort="False"/>
+                <DataGridTextColumn Header="Device-Mapping Libraries needed" Binding="{Binding LibrariesNeeded}" Width="190" CanUserSort="False"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
