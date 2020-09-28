@@ -16,7 +16,7 @@ namespace  CTTManagement.DataModel.ZatsTests
         public List<ZatsTestsModel> GetTestFiles()
         {
             List<ZatsTestsModel> zatsTestCases = new List<ZatsTestsModel>();
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\MK-Logic\Downloads\ZatsReflection\ZatsReflection\ZatsReflection\ZatsTestCases");
+            DirectoryInfo d = new DirectoryInfo(@"..\ZatsTestCases");
             FileInfo[] Files = d.GetFiles("*.dll");
             Regex underlines = new Regex(@"[_]{1,}",
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
