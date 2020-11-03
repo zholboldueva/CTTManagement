@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid x:Name="ZatsGridXAML" ItemsSource = "{Binding Path = ZatsTestsModel}" AutoGenerateColumns="False"  
-              SelectionMode="Single">
+        <DataGrid x:Name="ZatsGridXAML" AutoGenerateColumns="False"  
+              SelectionMode="Single" local:DataGridApi.CanUserHideColumns="True" ItemsSource="{Binding ZatsTestData, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Test Cases" Binding="{Binding TestCaseName}" Width="280" CanUserSort="False"/>
                 <DataGridTextColumn Header="TC Input Keys" Binding="{Binding TCInputKeys}" Width="200" CanUserSort="False" >

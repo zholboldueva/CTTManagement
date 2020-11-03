@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
-
-namespace CanUserHideColumnDemo
+using System.Windows.Controls.Primitives;
+namespace CTTManagement.Views
 {
-    public static class DataGridAPs
+
+    public static class DataGridApi
     {
         #region HideColumns
         #region HideColumnsHeader
         public static readonly DependencyProperty HideColumnsHeaderProperty =
             DependencyProperty.RegisterAttached("HideColumnsHeader",
-            typeof(object), typeof(DataGridAPs));
+            typeof(object), typeof(DataGridApi));
 
         public static object GetHideColumnsHeader(DataGrid obj)
         {
@@ -32,7 +32,7 @@ namespace CanUserHideColumnDemo
         #region HideColumnsHeaderTemplate
         public static readonly DependencyProperty HideColumnsHeaderTemplateProperty =
             DependencyProperty.RegisterAttached("HideColumnsHeaderTemplate",
-            typeof(DataTemplate), typeof(DataGridAPs));
+            typeof(DataTemplate), typeof(DataGridApi));
 
         public static DataTemplate GetHideColumnsHeaderTemplate(DataGrid obj)
         {
@@ -48,7 +48,7 @@ namespace CanUserHideColumnDemo
         #region HideColumnsIcon
         public static readonly DependencyProperty HideColumnsIconProperty =
             DependencyProperty.RegisterAttached("HideColumnsIcon",
-            typeof(object), typeof(DataGridAPs));
+            typeof(object), typeof(DataGridApi));
 
         public static object GetHideColumnsIcon(DataGrid obj)
         {
@@ -64,7 +64,7 @@ namespace CanUserHideColumnDemo
         #region CanUserHideColumns
         public static readonly DependencyProperty CanUserHideColumnsProperty =
             DependencyProperty.RegisterAttached("CanUserHideColumns",
-            typeof(bool), typeof(DataGridAPs),
+            typeof(bool), typeof(DataGridApi),
             new UIPropertyMetadata(false, OnCanUserHideColumnsChanged));
 
         public static bool GetCanUserHideColumns(DataGrid obj)

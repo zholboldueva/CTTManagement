@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,10 @@ namespace  CTTManagement.DataModel.ZatsTests
    public class ZatsReflectionVAccess
     {
         public ZatsTestsModel reflectedData;
-        public List<ZatsTestsModel> GetTestFiles()
+        public ObservableCollection<ZatsTestsModel> GetTestFiles()
         {
-            List<ZatsTestsModel> zatsTestCases = new List<ZatsTestsModel>();
-            DirectoryInfo d = new DirectoryInfo(@"..\ZatsTestCases");
+            ObservableCollection<ZatsTestsModel> zatsTestCases = new ObservableCollection<ZatsTestsModel>();
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\MK-Logic\Downloads\ZatsReflection\ZatsReflection\ZatsReflection\ZatsTestCases");
             FileInfo[] Files = d.GetFiles("*.dll");
             Regex underlines = new Regex(@"[_]{1,}",
             RegexOptions.Compiled | RegexOptions.IgnoreCase);

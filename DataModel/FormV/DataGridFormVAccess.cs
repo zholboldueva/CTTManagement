@@ -3,12 +3,12 @@ using CTTManagement.ViewModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows;
 using System.Xml;
 
 namespace CTTManagement.DataModel.FormV
@@ -16,8 +16,8 @@ namespace CTTManagement.DataModel.FormV
     public class DataGridFormVAccess
     {
 
-        public string openPathXml =@"..\arrayTest\FormV2-rev05p.xml";
-        string openPathSchema =  @"..\cert_form_schema.xsd";
+        public string openPathXml = "C:\\Users\\MK-Logic\\source\\repos\\CTTManagement\\arrayTest\\FormV2-rev05p.xml";
+        string openPathSchema = "C:\\Users\\MK-Logic\\source\\repos\\CTTManagement\\cert_form_schema.xsd";
         //string openPathSchema = "C:\\Users\\MK-Logic\\source\\repos\\DemoProject\\DemoProject\\cert_form_schema.xsd";
         public XmlDocument xmlDoc = new XmlDocument();
         XmlDocument m_certDoc = new XmlDocument();
@@ -55,9 +55,9 @@ namespace CTTManagement.DataModel.FormV
 
        
 
-            public IList<FormVModel> CreateDataGridView()
+            public ObservableCollection<FormVModel> CreateDataGridView()
         {
-            List<FormVModel> output = new List<FormVModel>();
+            ObservableCollection<FormVModel> output = new ObservableCollection<FormVModel>();
 
             FormVModel data;
             int index = 0;
@@ -91,7 +91,7 @@ namespace CTTManagement.DataModel.FormV
             return output;
         }
 
-        public void SetDataGridViewOfItems(string itemPrefix, Dictionary<Guid, FormNode> childItems, FormSection section, List<FormVModel> output)
+        public void SetDataGridViewOfItems(string itemPrefix, Dictionary<Guid, FormNode> childItems, FormSection section, ObservableCollection<FormVModel> output)
         {
             int itemIndex = 0;
 

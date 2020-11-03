@@ -1,22 +1,7 @@
-﻿using CTTManagement.DataModel.FormV;
-using CTTManagement.Model;
-using CTTManagement.ViewModel;
-using System;
+﻿using CTTManagement.ViewModel;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace CTTManagement.Views
 {
@@ -31,15 +16,14 @@ namespace CTTManagement.Views
         public FormVCheckBox()
         {
             InitializeComponent();
-              InitializeObservableData();
+             // InitializeObservableData();
         }
 
-
+      
         public void InitializeObservableData()
         {
             CheckBoxData dataGridAccess = new CheckBoxData();
             FormVCheckBox1.ItemsSource = dataGridAccess.getFormVTableColumnNames();
-
         }
     }
 
