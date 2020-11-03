@@ -1,10 +1,9 @@
-﻿<Window x:Class="CTTManagement.MainWindow"
+﻿<Window x:Class="CTTManagement.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CTTManagement"
-        xmlns:views = "clr-namespace:CTTManagement.Views"
+        xmlns:local="clr-namespace:CTTManagement.Views"
         mc:Ignorable="d"
         Title="CTT Management" Height="1529" Width="3000">
     <Window.Resources>
@@ -28,9 +27,9 @@
                 <MenuItem Header="_Exit" />
             </MenuItem>
         </Menu>
-        <views:TabSwitchView x:Name = "TabSwitchViewControl" Loaded = "TabSwitchViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Column="1" Grid.RowSpan="2"/>
+        <local:TabSwitchView x:Name = "TabSwitchViewControl" Loaded = "TabSwitchViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Column="1" Grid.RowSpan="2" Visibility="Visible"/>
         <!--<views:TableSettings x:Name = "TableSettingsControl" Loaded = "TableSettingsControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Row="1"/>-->
-        <views:FormVCheckBox x:Name = "FormVCheckBoxControl" Loaded = "TabSwitchViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Column="0" Visibility="Visible"/>
-        <views:TestCasesCheckBox x:Name = "TestCasesCheckBoxControl" Loaded = "TabSwitchViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Column="0" Grid.Row="1" Visibility="Visible" />
+        <local:FormVCheckBox x:Name = "FormVCheckBoxControl" Loaded = "TabSwitchViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Column="0" Visibility="Visible"/>
+        <local:TestCasesCheckBox x:Name = "TestCasesCheckBoxControl" Loaded = "TabSwitchViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Column="0" Grid.Row="1" Visibility="Visible" />
     </Grid>
 </Window>

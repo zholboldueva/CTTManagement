@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="CTTManagement.FormVView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodel="clr-namespace:CTTManagement.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid d:DataContext="{d:DesignInstance {x:Type viewmodel:MainAppVM}}">
+        <DataGrid  x:Name="DataGridXAML" ItemsSource="{Binding FormVDatas}" AutoGenerateColumns="False" SelectionMode="Single">
+            <DataGrid.Resources>
+                <DataGridTextColumn x:Key="FormItemNo" Header="Form Item No" Binding="{Binding FormItemNo}" Width="90" CanUserSort="False"/>
+                <DataGridTextColumn x:Key="TitleDescrNote" Header="Title/Descr/Note" Binding="{Binding TitleDescrNote}" Width="250" CanUserSort="False"/>
+                <DataGridHyperlinkColumn x:Key="WikiPageName" Header="Wiki Page Name" Binding="{Binding WikiPageName}"  Width="200" CanUserSort="False"/>
+                <DataGridTextColumn x:Key="SelfCert" Header="SelfCert" Binding="{Binding SelfCert}" Width="90" CanUserSort="False"/>
+                <DataGridTextColumn x:Key="Verification" Header="Verification" Binding="{Binding Verification}" Width="90" CanUserSort="False"/>
+                <DataGridTextColumn x:Key="AdHoc" Header="AdHoc" Binding="{Binding AdHoc}" Width="90" CanUserSort="False"/>
+                <DataGridTextColumn x:Key="ZatsKey" Header="ZATS Key" Binding="{Binding ZatsKey}" Width="250" CanUserSort="False" />
+                <DataGridTextColumn x:Key="ZatsValue" Header="ZATS Value" Binding="{Binding ZatsValue}"  Width="250" CanUserSort="False"/>
+                <DataGridTextColumn x:Key="ZatsTests" Header="ZATS Tests" Binding="{Binding ZatsTests}"  Width="250" CanUserSort="False"/>
+                <DataGridTextColumn x:Key="TriggeredBy" Header="TriggeredBy" Binding="{Binding TriggeredBy}"  Width="90" CanUserSort="False"/>
+                <DataGridTextColumn x:Key="TagName" Header="Tag Name" Binding="{Binding TagName}" Width="200" CanUserSort="False"/>
+                <DataGridTextColumn x:Key="TagValue" Header="Tag Value" Binding="{Binding TagValue}"  Width="290" CanUserSort="False"/>
+                <DataGridTextColumn x:Key="InputCustomType" Header="InputCustomType" Binding="{Binding InputCustomType}" Width="90" CanUserSort="False"/>
+                <DataGridTextColumn x:Key="InputComboType" Header="InputComboType" Binding="{Binding InputComboType}" Width="90" CanUserSort="False"/>
+            </DataGrid.Resources>
+        </DataGrid>
+    </Grid>
+</UserControl>

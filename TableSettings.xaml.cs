@@ -12,19 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using  CTTManagement.Views;
 
 namespace CTTManagement
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// Interaktionslogik für TabSwitchView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TableSettings : UserControl
     {
-        //public FormVView FormGridView;
-        //public FormVCheckBox FormGridCheckBox;
-
-        public MainWindow()
+        public TableSettings()
         {
             InitializeComponent();
         }
@@ -34,14 +30,14 @@ namespace CTTManagement
 
         }
 
-        //private void TableSettingsControl_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    //FormGridView = TableSettingsControl.TabSwitchViewControl.FormVViewControl as FormVView;
-        //    //FormGridCheckBox = TableSettingsControl.FormVCheckBoxControl as FormVCheckBox;
+        private void FormVCheckBoxControl_Loaded(object sender, RoutedEventArgs e)
+        {
 
-        //    //var k=FormGridView.DataGridXAML.Columns[];
-        //}
+        }
 
+        private void TestCasesCheckBoxControl_Loaded(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

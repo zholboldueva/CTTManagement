@@ -8,14 +8,12 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid >
         <Grid.Resources>
-            <views:FilterVisibilityConverter x:Key="FilterVisibilityConverter" />
-            <CheckBox x:Key="DummyCheckBox"/>
+           
         </Grid.Resources>
         <DataGrid  x:Name="DataGridXAML" ItemsSource = "{Binding Path = FormVModel}" AutoGenerateColumns="False"  
               SelectionMode="Single" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Form Item No" Binding="{Binding FormItemNo}" Width="90" CanUserSort="False" 
-                                    Visibility="{Binding Source={StaticResource DummyCheckBox},Path=IsChecked, Converter={StaticResource FilterVisibilityConverter}}"/>
+                <DataGridTextColumn Header="Form Item No" Binding="{Binding FormItemNo}" Width="90" CanUserSort="False" />
                 <DataGridTextColumn Header="Title/Descr/Note" Binding="{Binding TitleDescrNote}" Width="250" CanUserSort="False" >
                     <!--<DataGridTextColumn.ElementStyle>
                         <Style>
