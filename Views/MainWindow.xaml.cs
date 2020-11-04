@@ -14,11 +14,12 @@ namespace CTTManagement.Views
             InitializeComponent();
         }
 
-        private void TabSwitchViewControl_Loaded(object sender, RoutedEventArgs e)
+        private void ShowTableSettingsDialog(object sender, RoutedEventArgs e)
         {
-
+            Window tableSettingsDialog = new Dialog();
+            tableSettingsDialog.Show();
         }
 
-
+        
     }
 }

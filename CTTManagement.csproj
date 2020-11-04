@@ -94,7 +94,11 @@
     <Compile Include="DataModel\ZatsTests\ZcpZatsDataList.cs" />
     <Compile Include="ViewModel\CheckBoxData.cs" />
     <Compile Include="ViewModel\CheckBoxViewModel.cs" />
+    <Compile Include="ViewModel\InfoDialog.cs" />
     <Compile Include="Views\DataGridApi.cs" />
+    <Compile Include="Views\Dialog.xaml.cs">
+      <DependentUpon>Dialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FilterVisibilityConverter.cs" />
     <Compile Include="Views\FormVCheckBox.xaml.cs">
       <DependentUpon>FormVCheckBox.xaml</DependentUpon>
@@ -114,6 +118,10 @@
     <Compile Include="Views\TestCasesView.xaml.cs">
       <DependentUpon>TestCasesView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

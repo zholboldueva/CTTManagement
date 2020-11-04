@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace CTTManagement.Views
 {
@@ -28,8 +29,10 @@ namespace CTTManagement.Views
             DataGridXAML.ItemsSource = dataGridAccess.CreateDataGridView();
         }
 
-       
+        private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
 
+        }
     }
 
    

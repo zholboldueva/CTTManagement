@@ -8,7 +8,12 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid >
         <DataGrid x:Name="DataGridXAML"  AutoGenerateColumns="False"  
-              SelectionMode="Single" views:DataGridApi.CanUserHideColumns="True" ItemsSource="{Binding FormVData, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+              SelectionMode="Single" views:DataGridApi.CanUserHideColumns="True" ItemsSource="{Binding FormVData, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" IsReadOnly="True">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Form Item No" Binding="{Binding FormItemNo}" Width="90" CanUserSort="False" />
                 <DataGridTextColumn Header="Title/Descr/Note" Binding="{Binding TitleDescrNote}" Width="250" CanUserSort="False"/>

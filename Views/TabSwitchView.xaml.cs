@@ -24,24 +24,20 @@ namespace CTTManagement.Views
         {
             InitializeComponent();
         }
-        private void FormVViewControl_Loaded(object sender, RoutedEventArgs e)
+        private void TopControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (FormVTop.IsSelected) TestCasesBottom.IsSelected = true;
+            else if (TestCasesTop.IsSelected) FormVBottom.IsSelected = true;
         }
-        private void TestCasesViewControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (TestCasesTop.IsSelected) FormVBottom.IsSelected = true;
-        }
+      
 
-        private void FormVViewControlBottom_Loaded(object sender, RoutedEventArgs e)
+        private void ControlBottom_Loaded(object sender, RoutedEventArgs e)
         {
             if (FormVBottom.IsSelected) TestCasesTop.IsSelected = true;
+            else if (TestCasesBottom.IsSelected) FormVTop.IsSelected = true;
         }
 
-        private void TestCasesViewControlBottom_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (TestCasesBottom.IsSelected) FormVTop.IsSelected = true;
-        }
+       
 
     }
 }

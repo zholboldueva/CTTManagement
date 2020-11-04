@@ -14,18 +14,18 @@
         </Grid.RowDefinitions>
         <TabControl x:Name="Top" Grid.Row="0">
             <TabItem x:Name="FormVTop" Header="FormV">
-                <views:FormVView x:Name = "FormVViewControl" Loaded = "FormVViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
+                <views:FormVView x:Name = "FormVViewControl" Loaded = "TopControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
             </TabItem>
             <TabItem x:Name="TestCasesTop" Header="Test Cases List">
-                <views:TestCasesView x:Name = "TestCasesViewControl" Loaded = "TestCasesViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
+                <views:TestCasesView x:Name = "TestCasesViewControl" Loaded = "TopControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
             </TabItem>
         </TabControl>
         <TabControl  x:Name="Bottom" Grid.Row="1">
             <TabItem x:Name="FormVBottom" Header="FormV">
-                <views:FormVView x:Name = "FormVViewControlBottom" Loaded = "FormVViewControlBottom_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
+                <views:FormVView x:Name = "FormVViewControlBottom" Loaded = "ControlBottom_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
             </TabItem>
             <TabItem x:Name="TestCasesBottom" Header="Test Cases List">
-                <views:TestCasesView x:Name = "TestCasesViewControlBottom" Loaded = "TestCasesViewControlBottom_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
+                <views:TestCasesView x:Name = "TestCasesViewControlBottom" Loaded = "ControlBottom_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
             </TabItem>
         </TabControl>
     </Grid>

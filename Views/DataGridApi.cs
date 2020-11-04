@@ -61,6 +61,8 @@ namespace CTTManagement.Views
         }
         #endregion HideColumnsIcon
 
+       
+
         #region CanUserHideColumns
         public static readonly DependencyProperty CanUserHideColumnsProperty =
             DependencyProperty.RegisterAttached("CanUserHideColumns",
@@ -76,7 +78,6 @@ namespace CTTManagement.Views
         {
             obj.SetValue(CanUserHideColumnsProperty, value);
         }
-
         private static void OnCanUserHideColumnsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             DataGrid dataGrid = d as DataGrid;
@@ -86,7 +87,7 @@ namespace CTTManagement.Views
             if ((bool)e.NewValue == false)
             {
                 dataGrid.Loaded -= new RoutedEventHandler(dataGrid_Loaded);
-                RemoveAllItems(dataGrid);
+              //  RemoveAllItems(dataGrid);
                 return;
             }
 
@@ -143,18 +144,18 @@ namespace CTTManagement.Views
             dataGrid.LayoutUpdated += handler;
         }
 
-        private static DataGridColumnHeader[] GetColumnHeaders(DataGrid dataGrid)
+        private static HashSet<DataGridColumnHeader> GetColumnHeaders(DataGrid dataGrid)
         {
             if (dataGrid == null)
                 return null;
 
             dataGrid.UpdateLayout();
-            DataGridColumnHeader[] columnHeaders = CustomVisualTreeHelper<DataGridColumnHeader>.FindChildrenRecursive(dataGrid);
+            HashSet<DataGridColumnHeader> columnHeaders = CustomVisualTreeHelper<DataGridColumnHeader>.FindChildrenRecursive(dataGrid);
 
 
             return (from DataGridColumnHeader columnHeader in columnHeaders
                     where columnHeader != null && columnHeader.Column != null
-                    select columnHeader).ToArray();
+                    select columnHeader).ToHashSet();
         }
 
         private static string GetColumnName(DataGridColumn column)
@@ -166,6 +167,36 @@ namespace CTTManagement.Views
                 return column.Header.ToString();
             else
                 return string.Format("Column {0}", column.DisplayIndex);
+        }
+
+        private static CheckBox GenerateCheckBoxItem(DataGrid dataGrid, DataGridColumn column)
+        {
+            if (column == null)
+                return null;
+
+            CheckBox item = new CheckBox();
+            item.Tag = column;
+
+            item.Content = GetColumnName(column);
+            if (string.IsNullOrEmpty(item.Content as string))
+                return null;
+
+            item.ToolTip = string.Format("Toggle column '{0}' visibility.", item.Content);
+
+           
+            item.IsChecked = column.Visibility == Visibility.Visible;
+
+            item.Checked += delegate
+            {
+                SetItemIsChecked(dataGrid, column, true);
+            };
+
+            item.Unchecked += delegate
+            {
+                SetItemIsChecked(dataGrid, column, false);
+            };
+
+            return item;
         }
 
         private static MenuItem GenerateItem(DataGrid dataGrid, DataGridColumn column)
@@ -198,21 +229,30 @@ namespace CTTManagement.Views
             return item;
         }
 
-        public static MenuItem[] GetAttachedItems(DataGridColumnHeader columnHeader)
+        public static MenuItem[] GetAttachedItems(DataGrid dataGrid)
         {
-            if (columnHeader == null || columnHeader.ContextMenu == null)
+            if (dataGrid == null || dataGrid.ContextMenu == null)
                 return null;
 
-            ItemsControl itemsContainer = (from object i in columnHeader.ContextMenu.Items
+            ItemsControl itemsContainer = (from object i in dataGrid.ContextMenu.Items
                                            where i is MenuItem && ((MenuItem)i).Tag != null && ((MenuItem)i).Tag.ToString() == "ItemsContainer"
                                            select i).FirstOrDefault() as MenuItem;
 
             if (itemsContainer == null)
-                itemsContainer = columnHeader.ContextMenu;
-
-            return (from object i in itemsContainer.Items
-                    where i is MenuItem && ((MenuItem)i).Tag is DataGridColumn
-                    select i).Cast<MenuItem>().ToArray();
+                itemsContainer = dataGrid.ContextMenu;
+            HashSet<MenuItem> menuItems = new HashSet<MenuItem>();
+            foreach (MenuItem i in itemsContainer.Items)
+            {
+                if(i is MenuItem && ((MenuItem)i).Tag is DataGridColumn)
+                {
+                    menuItems.Add(i);
+                }
+            }
+            MenuItem[] menuItemsArray = menuItems.ToArray();
+                //(from object i in itemsContainer.Items
+                //                   where i is MenuItem && ((MenuItem)i).Tag is DataGridColumn
+                //                   select i).Cast<MenuItem>().ToArray();
+            return menuItemsArray;
         }
 
         private static DataGridColumn GetColumnFromName(DataGrid dataGrid, string columnName)
@@ -234,7 +274,7 @@ namespace CTTManagement.Views
             if (dataGrid == null || column == null)
                 return null;
 
-            DataGridColumnHeader[] columnHeaders = GetColumnHeaders(dataGrid);
+            HashSet<DataGridColumnHeader> columnHeaders = GetColumnHeaders(dataGrid);
             return (from DataGridColumnHeader columnHeader in columnHeaders
                     where columnHeader.Column == column
                     select columnHeader).FirstOrDefault();
@@ -263,9 +303,9 @@ namespace CTTManagement.Views
                 return;
 
             // Mark items and/or items container for removal.
-            if (columnHeader.ContextMenu != null)
+            if (dataGrid.ContextMenu != null)
             {
-                foreach (object item in columnHeader.ContextMenu.Items)
+                foreach (object item in dataGrid.ContextMenu.Items)
                 {
                     if (item is MenuItem && ((MenuItem)item).Tag != null
                         && (((MenuItem)item).Tag.ToString() == "ItemsContainer" || ((MenuItem)item).Tag is DataGridColumn))
@@ -276,7 +316,7 @@ namespace CTTManagement.Views
             // Remove items and/or items container.
             foreach (MenuItem item in itemsToRemove)
             {
-                columnHeader.ContextMenu.Items.Remove(item);
+                dataGrid.ContextMenu.Items.Remove(item);
             }
         }
 
@@ -306,25 +346,25 @@ namespace CTTManagement.Views
             else if (!isChecked)
                 column.Visibility = Visibility.Hidden;
 
-            DataGridColumnHeader[] columnHeaders = GetColumnHeaders(dataGrid);
+            HashSet<DataGridColumnHeader> columnHeaders = GetColumnHeaders(dataGrid);
             ItemsControl itemsContainer = null;
             object containerHeader = GetHideColumnsHeader(dataGrid);
 
             foreach (DataGridColumnHeader columnHeader in columnHeaders)
             {
                 itemsContainer = null;
-                if (columnHeader != null)
+                if (dataGrid != null)
                 {
-                    if (columnHeader.ContextMenu == null)
+                    if (dataGrid.ContextMenu == null)
                         continue;
 
-                    itemsContainer = (from object i in columnHeader.ContextMenu.Items
+                    itemsContainer = (from object i in dataGrid.ContextMenu.Items
                                       where i is MenuItem && ((MenuItem)i).Header == containerHeader
                                       select i).FirstOrDefault() as MenuItem;
                 }
 
                 if (itemsContainer == null)
-                    itemsContainer = columnHeader.ContextMenu;
+                    itemsContainer = dataGrid.ContextMenu;
 
                 foreach (object item in itemsContainer.Items)
                 {
@@ -346,25 +386,69 @@ namespace CTTManagement.Views
             if (dataGrid == null)
                 return;
 
-            DataGridColumnHeader[] columnHeaders = GetColumnHeaders(dataGrid);
+            HashSet<DataGridColumnHeader> columnHeaders = GetColumnHeaders(dataGrid);
             if (columnHeaders == null)
                 return;
 
             SetupColumnHeader(dataGrid, columnHeaders, columnHeader);
         }
 
-        private static void SetupColumnHeader(DataGrid dataGrid, DataGridColumnHeader[] columnHeaders, DataGridColumnHeader columnHeader)
+        //private static void SetupColumnHeader(DataGrid dataGrid, DataGridColumnHeader[] columnHeaders, DataGridColumnHeader columnHeader)
+        //{
+
+        //    if (columnHeader.ContextMenu == null)
+        //        columnHeader.ContextMenu = new ContextMenu();
+
+        //    ItemsControl itemsContainer = null;
+        //    itemsContainer = columnHeader.ContextMenu;
+
+        //    object containerHeader = GetHideColumnsHeader(dataGrid);
+        //    if (containerHeader != null)
+        //    {
+        //        MenuItem ic = (from object i in columnHeader.ContextMenu.Items
+        //                       where i is MenuItem && ((MenuItem)i).Tag != null && ((MenuItem)i).Tag.ToString() == "ItemsContainer"
+        //                       select i).FirstOrDefault() as MenuItem;
+
+        //        if (ic == null)
+        //        {
+        //            itemsContainer = new MenuItem()
+        //            {
+        //                Header = containerHeader,
+        //                HeaderTemplate = GetHideColumnsHeaderTemplate(dataGrid) as DataTemplate,
+        //                Icon = GetHideColumnsIcon(dataGrid),
+        //                Tag = "ItemsContainer"
+        //            };
+        //            columnHeader.ContextMenu.Items.Add(itemsContainer);
+        //        }
+        //        else
+        //            return;
+        //    }
+
+        //    foreach (DataGridColumnHeader columnHeader2 in columnHeaders)
+        //    {
+        //        if (columnHeader2 != columnHeader
+        //            && itemsContainer is ContextMenu
+        //            && columnHeader2.ContextMenu == itemsContainer)
+        //        {
+        //            continue;
+        //        }
+        //        itemsContainer.Items.Add(GenerateItem(dataGrid, columnHeader2.Column));
+        //    }
+        //}
+
+        private static void SetupColumnHeader(DataGrid dataGrid, HashSet<DataGridColumnHeader> columnHeaders, DataGridColumnHeader columnHeader)
         {
-            if (columnHeader.ContextMenu == null)
-                columnHeader.ContextMenu = new ContextMenu();
+
+            if (dataGrid.ContextMenu == null)
+                dataGrid.ContextMenu = new ContextMenu();
 
             ItemsControl itemsContainer = null;
-            itemsContainer = columnHeader.ContextMenu;
-
+            itemsContainer = dataGrid.ContextMenu;
             object containerHeader = GetHideColumnsHeader(dataGrid);
-            if (containerHeader != null)
+            
+            if (dataGrid != null)
             {
-                MenuItem ic = (from object i in columnHeader.ContextMenu.Items
+                MenuItem ic = (from object i in dataGrid.ContextMenu.Items
                                where i is MenuItem && ((MenuItem)i).Tag != null && ((MenuItem)i).Tag.ToString() == "ItemsContainer"
                                select i).FirstOrDefault() as MenuItem;
 
@@ -372,40 +456,43 @@ namespace CTTManagement.Views
                 {
                     itemsContainer = new MenuItem()
                     {
-                        Header = containerHeader,
-                        HeaderTemplate = GetHideColumnsHeaderTemplate(dataGrid) as DataTemplate,
-                        Icon = GetHideColumnsIcon(dataGrid),
-                        Tag = "ItemsContainer"
+                            //Header = containerHeader,
+                            //HeaderTemplate = GetHideColumnsHeaderTemplate(dataGrid) as DataTemplate,
+                        ////    Icon = GetHideColumnsIcon(dataGrid),
+                            Tag = "ItemsContainer"
                     };
-                    columnHeader.ContextMenu.Items.Add(itemsContainer);
+                    dataGrid.ContextMenu.Items.Add(itemsContainer);
                 }
                 else
                     return;
+              
             }
 
             foreach (DataGridColumnHeader columnHeader2 in columnHeaders)
             {
                 if (columnHeader2 != columnHeader
                     && itemsContainer is ContextMenu
-                    && columnHeader2.ContextMenu == itemsContainer)
+                    && dataGrid.ContextMenu == itemsContainer)
                 {
                     continue;
                 }
                 itemsContainer.Items.Add(GenerateItem(dataGrid, columnHeader2.Column));
             }
         }
-
         public static bool SetupColumnHeaders(DataGrid dataGrid)
         {
-            DataGridColumnHeader[] columnHeaders = GetColumnHeaders(dataGrid);
+           HashSet<DataGridColumnHeader> columnHeaders = GetColumnHeaders(dataGrid);
             if (columnHeaders == null || columnHeaders.Count() == 0)
                 return false;
 
             RemoveAllItems(dataGrid);
             columnHeaders = GetColumnHeaders(dataGrid);
+            List<DataGridColumnHeader> shownHeaders = new List<DataGridColumnHeader>();
             foreach (DataGridColumnHeader columnHeader in columnHeaders)
             {
-                SetupColumnHeader(dataGrid, columnHeaders, columnHeader);
+                
+                    SetupColumnHeader(dataGrid, columnHeaders, columnHeader);
+                   
             }
 
             return true;
@@ -458,8 +545,11 @@ namespace CTTManagement.Views
 
         private static void SyncItemsOnColumnHeader(DataGridColumnHeader columnHeader)
         {
+            DataGrid dataGrid = CustomVisualTreeHelper<DataGrid>.FindAncestor(columnHeader);
+            if (dataGrid == null)
+                return;
             bool isVisible;
-            foreach (MenuItem item in GetAttachedItems(columnHeader))
+            foreach (MenuItem item in GetAttachedItems(dataGrid))
             {
                 if (item.Tag is DataGridColumn)
                 {
@@ -548,7 +638,7 @@ namespace CTTManagement.Views
                 return children.ToArray();
             }
 
-            public static TReturn[] FindChildrenRecursive(DependencyObject parent)
+            public static HashSet<TReturn> FindChildrenRecursive(DependencyObject parent)
             {
                 int childCount = VisualTreeHelper.GetChildrenCount(parent);
                 DependencyObject child = null;
@@ -564,7 +654,7 @@ namespace CTTManagement.Views
 
                     children.AddRange(CustomVisualTreeHelper<TReturn>.FindChildrenRecursive(child));
                 }
-                return children.ToArray();
+                return children.ToHashSet();
             }
         }
         #endregion CustomVisualTreeHelper

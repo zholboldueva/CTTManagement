@@ -10,17 +10,20 @@
         
     </Window.Resources>
     <Grid>
-       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="Menu">
                 <MenuItem Header="Form Loading" />
                 <MenuItem Header="Reflection" />
-                <MenuItem Header="Table Settings" />
+                <MenuItem Header="Table Settings" Click="ShowTableSettingsDialog"/>
                 <Separator />
                 <MenuItem Header="_Exit" />
             </MenuItem>
         </Menu>
-        <local:TabSwitchView x:Name = "TabSwitchViewControl" Loaded = "TabSwitchViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
+        <local:TabSwitchView x:Name = "TabSwitchViewControl"  ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Row="1"/>
         <!--<local:TableSettings x:Name = "TableSettingsControl" Loaded = "TableSettingsControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Row="1"/>-->
         <!--<local:FormVCheckBox x:Name = "FormVCheckBoxControl" Loaded = "TabSwitchViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Column="0" Visibility="Visible"/>
         <local:TestCasesCheckBox x:Name = "TestCasesCheckBoxControl" Loaded = "TabSwitchViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Column="0" Grid.Row="1" Visibility="Visible" />-->
