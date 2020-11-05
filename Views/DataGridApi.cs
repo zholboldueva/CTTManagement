@@ -78,7 +78,7 @@ namespace CTTManagement.Views
         {
             obj.SetValue(CanUserHideColumnsProperty, value);
         }
-        private static void OnCanUserHideColumnsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static void OnCanUserHideColumnsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             DataGrid dataGrid = d as DataGrid;
             if (dataGrid == null)
@@ -100,7 +100,7 @@ namespace CTTManagement.Views
                 SetupColumnHeaders(dataGrid);
         }
 
-        private static void dataGrid_Loaded(object sender, RoutedEventArgs e)
+        public static void dataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             DataGrid dataGrid = sender as DataGrid;
             if (dataGrid == null)
@@ -124,7 +124,7 @@ namespace CTTManagement.Views
                 SetupColumnHeaders(dataGrid);
         }
 
-        private static void dataGrid_TargetUpdated(object sender, DataTransferEventArgs e)
+        public static void dataGrid_TargetUpdated(object sender, DataTransferEventArgs e)
         {
             if (e.Property != DataGrid.ItemsSourceProperty)
                 return;
@@ -144,7 +144,7 @@ namespace CTTManagement.Views
             dataGrid.LayoutUpdated += handler;
         }
 
-        private static HashSet<DataGridColumnHeader> GetColumnHeaders(DataGrid dataGrid)
+        public static HashSet<DataGridColumnHeader> GetColumnHeaders(DataGrid dataGrid)
         {
             if (dataGrid == null)
                 return null;
@@ -158,7 +158,7 @@ namespace CTTManagement.Views
                     select columnHeader).ToHashSet();
         }
 
-        private static string GetColumnName(DataGridColumn column)
+        public static string GetColumnName(DataGridColumn column)
         {
             if (column == null)
                 return string.Empty;
@@ -169,37 +169,37 @@ namespace CTTManagement.Views
                 return string.Format("Column {0}", column.DisplayIndex);
         }
 
-        private static CheckBox GenerateCheckBoxItem(DataGrid dataGrid, DataGridColumn column)
-        {
-            if (column == null)
-                return null;
+        //private static CheckBox GenerateCheckBoxItem(DataGrid dataGrid, DataGridColumn column)
+        //{
+        //    if (column == null)
+        //        return null;
 
-            CheckBox item = new CheckBox();
-            item.Tag = column;
+        //    CheckBox item = new CheckBox();
+        //    item.Tag = column;
 
-            item.Content = GetColumnName(column);
-            if (string.IsNullOrEmpty(item.Content as string))
-                return null;
+        //    item.Content = GetColumnName(column);
+        //    if (string.IsNullOrEmpty(item.Content as string))
+        //        return null;
 
-            item.ToolTip = string.Format("Toggle column '{0}' visibility.", item.Content);
+        //    item.ToolTip = string.Format("Toggle column '{0}' visibility.", item.Content);
 
-           
-            item.IsChecked = column.Visibility == Visibility.Visible;
 
-            item.Checked += delegate
-            {
-                SetItemIsChecked(dataGrid, column, true);
-            };
+        //    item.IsChecked = column.Visibility == Visibility.Visible;
 
-            item.Unchecked += delegate
-            {
-                SetItemIsChecked(dataGrid, column, false);
-            };
+        //    item.Checked += delegate
+        //    {
+        //        SetItemIsChecked(dataGrid, column, true);
+        //    };
 
-            return item;
-        }
+        //    item.Unchecked += delegate
+        //    {
+        //        SetItemIsChecked(dataGrid, column, false);
+        //    };
 
-        private static MenuItem GenerateItem(DataGrid dataGrid, DataGridColumn column)
+        //    return item;
+        //}
+
+        public static MenuItem GenerateItem(DataGrid dataGrid, DataGridColumn column)
         {
             if (column == null)
                 return null;
@@ -255,7 +255,7 @@ namespace CTTManagement.Views
             return menuItemsArray;
         }
 
-        private static DataGridColumn GetColumnFromName(DataGrid dataGrid, string columnName)
+        public static DataGridColumn GetColumnFromName(DataGrid dataGrid, string columnName)
         {
             if (string.IsNullOrEmpty(columnName))
                 return null;
@@ -326,7 +326,7 @@ namespace CTTManagement.Views
             SetupColumnHeaders(dataGrid);
         }
 
-        private static void SetItemIsChecked(DataGrid dataGrid, DataGridColumn column, bool isChecked)
+        public static void SetItemIsChecked(DataGrid dataGrid, DataGridColumn column, bool isChecked)
         {
             if (dataGrid == null || column == null)
                 return;
@@ -377,7 +377,7 @@ namespace CTTManagement.Views
             }
         }
 
-        private static void SetupColumnHeader(DataGridColumnHeader columnHeader)
+        public static void SetupColumnHeader(DataGridColumnHeader columnHeader)
         {
             if (columnHeader == null)
                 return;
@@ -436,7 +436,7 @@ namespace CTTManagement.Views
         //    }
         //}
 
-        private static void SetupColumnHeader(DataGrid dataGrid, HashSet<DataGridColumnHeader> columnHeaders, DataGridColumnHeader columnHeader)
+        public static void SetupColumnHeader(DataGrid dataGrid, HashSet<DataGridColumnHeader> columnHeaders, DataGridColumnHeader columnHeader)
         {
 
             if (dataGrid.ContextMenu == null)
@@ -509,7 +509,7 @@ namespace CTTManagement.Views
         /// </summary>
         /// <param name="dataGrid"></param>
         /// <param name="column"></param>
-        private static void ShowColumn(DataGrid dataGrid, DataGridColumn column)
+        public static void ShowColumn(DataGrid dataGrid, DataGridColumn column)
         {
             if (dataGrid == null || column == null)
                 return;

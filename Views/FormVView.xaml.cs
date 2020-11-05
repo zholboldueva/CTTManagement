@@ -17,11 +17,11 @@ namespace CTTManagement.Views
         public FormVView()
         {
             InitializeComponent();
-
             DataGridFormVAccess dataGridAccess = new DataGridFormVAccess();
             FormVData = dataGridAccess.CreateDataGridView();
             //InitializeObservableData();
         }
+
         public ObservableCollection<FormVModel> FormVData { get; set; }
         public void InitializeObservableData()
         {
@@ -29,9 +29,12 @@ namespace CTTManagement.Views
             DataGridXAML.ItemsSource = dataGridAccess.CreateDataGridView();
         }
 
+
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            DataGridCell selectedCell = sender as DataGridCell;
+            string columnName=selectedCell.Column.Header.ToString();
+            string content=selectedCell.ToString();
         }
     }
 

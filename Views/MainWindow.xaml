@@ -4,28 +4,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CTTManagement.Views"
+        xmlns:vm="clr-namespace:CTTManagement.ViewModel"
         mc:Ignorable="d"
         Title="CTT Management" Height="1529" Width="3000">
     <Window.Resources>
-        
+        <!-- -->
+        <DataTemplate DataType="{x:Type vm:InfoVM}">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="{Binding SelectedCellsHeader}"/>
+                <Label FontWeight="DemiBold" Content="{Binding SelectedCellsContent}"/>
+                <Label Content="{Binding SelectedCellsInfo}"/>
+            </StackPanel>
+        </DataTemplate>
     </Window.Resources>
+
+    <Window.DataContext>
+        <vm:MainWindowVM/>
+    </Window.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
         <Menu Grid.Row="0">
             <MenuItem Header="Menu">
                 <MenuItem Header="Form Loading" />
                 <MenuItem Header="Reflection" />
-                <MenuItem Header="Table Settings" Click="ShowTableSettingsDialog"/>
                 <Separator />
                 <MenuItem Header="_Exit" />
             </MenuItem>
         </Menu>
-        <local:TabSwitchView x:Name = "TabSwitchViewControl"  ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Row="1"/>
-        <!--<local:TableSettings x:Name = "TableSettingsControl" Loaded = "TableSettingsControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Row="1"/>-->
-        <!--<local:FormVCheckBox x:Name = "FormVCheckBoxControl" Loaded = "TabSwitchViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Column="0" Visibility="Visible"/>
-        <local:TestCasesCheckBox x:Name = "TestCasesCheckBoxControl" Loaded = "TabSwitchViewControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Column="0" Grid.Row="1" Visibility="Visible" />-->
+        <!--<local:TabSwitchView x:Name = "TabSwitchViewControl"  ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Row="1"/>-->
+        <TabControl x:Name="Top" Grid.Row="1" Grid.ColumnSpan="2">
+            <TabItem x:Name="FormVTop" Header="FormV">
+                <local:FormVView x:Name = "FormVViewControl" Loaded = "TopControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
+            </TabItem>
+            <TabItem x:Name="TestCasesTop" Header="Test Cases List">
+                <local:TestCasesView x:Name = "TestCasesViewControl" Loaded = "TopControl_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
+            </TabItem>
+        </TabControl>
+        <TabControl  x:Name="Bottom" Grid.Row="2">
+            <TabItem x:Name="FormVBottom" Header="FormV">
+                <local:FormVView x:Name = "FormVViewControlBottom" Loaded = "ControlBottom_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
+            </TabItem>
+            <TabItem x:Name="TestCasesBottom" Header="Test Cases List">
+                <local:TestCasesView x:Name = "TestCasesViewControlBottom" Loaded = "ControlBottom_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Visible" />
+            </TabItem>
+        </TabControl>
+        <local:Info Grid.Row="2" Grid.Column="1" />
     </Grid>
 </Window>

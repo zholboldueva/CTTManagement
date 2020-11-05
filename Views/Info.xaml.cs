@@ -10,34 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CTTManagement.Views
 {
     /// <summary>
-    /// Interaktionslogik für TabSwitchView.xaml
+    /// Interaktionslogik für Info.xaml
     /// </summary>
-    public partial class TableSettings : UserControl
+    public partial class Info : UserControl
     {
-        public TableSettings()
+        public Info()
         {
             InitializeComponent();
-        }
-
-        private void TabSwitchViewControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void FormVCheckBoxControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TestCasesCheckBoxControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

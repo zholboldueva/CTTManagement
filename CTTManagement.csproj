@@ -92,33 +92,18 @@
     <Compile Include="DataModel\ZatsTests\ZatsReflectionVAccess.cs" />
     <Compile Include="DataModel\ZatsTests\ZatsTestCaseReflectionData.cs" />
     <Compile Include="DataModel\ZatsTests\ZcpZatsDataList.cs" />
-    <Compile Include="ViewModel\CheckBoxData.cs" />
-    <Compile Include="ViewModel\CheckBoxViewModel.cs" />
-    <Compile Include="ViewModel\InfoDialog.cs" />
+    <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="Views\DataGridApi.cs" />
-    <Compile Include="Views\Dialog.xaml.cs">
-      <DependentUpon>Dialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FilterVisibilityConverter.cs" />
-    <Compile Include="Views\FormVCheckBox.xaml.cs">
-      <DependentUpon>FormVCheckBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\FormVView.xaml.cs">
       <DependentUpon>FormVView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TableSettings.xaml.cs">
-      <DependentUpon>TableSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TabSwitchView.xaml.cs">
-      <DependentUpon>TabSwitchView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TestCasesCheckBox.xaml.cs">
-      <DependentUpon>TestCasesCheckBox.xaml</DependentUpon>
+    <Compile Include="Views\Info.xaml.cs">
+      <DependentUpon>Info.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TestCasesView.xaml.cs">
       <DependentUpon>TestCasesView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\Dialog.xaml">
+    <Page Include="Views\Info.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,23 +119,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\FormVCheckBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\FormVView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TableSettings.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\TabSwitchView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TestCasesCheckBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
